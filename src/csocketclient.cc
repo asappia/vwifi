@@ -68,9 +68,7 @@ bool CSocketClient::Connect(struct sockaddr* server, size_t size_of_server)
 ssize_t CSocketClient::Send(const char* data, ssize_t sizeOfData)
 {
 	if ( IsConnected ){
-
 		return CSocket::Send(Master, data, sizeOfData);
-
 	}
 	return SOCKET_ERROR;
 }
@@ -86,9 +84,7 @@ ssize_t CSocketClient::SendBigData(const char* data, TMinimalSize sizeOfData)
 ssize_t CSocketClient::Read(char* data, ssize_t sizeOfData)
 {
 	if ( IsConnected ){
-
 		return CSocket::Read(Master, data, sizeOfData);
-
 	}
 	return SOCKET_ERROR;
 }

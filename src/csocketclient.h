@@ -9,6 +9,8 @@ class CSocketClient : public CSocket
 
 		bool StopTheReconnect;
 
+		TDescriptor descriptor;
+
 		void Init();
 
 	protected :
@@ -18,11 +20,17 @@ class CSocketClient : public CSocket
 	public :
 
 		CSocketClient();
-		~CSocketClient();
+		virtual ~CSocketClient();
 
+		// Bring base class functions into scope
+		using CSocket::Send;
+		using CSocket::SendBigData;
+		using CSocket::Read;
+		using CSocket::ReadBigData;
+
+		// Convenience functions that use stored descriptor
 		ssize_t Send(const char* data, ssize_t sizeOfData);
 		ssize_t SendBigData(const char* data, TMinimalSize sizeOfData);
-
 		ssize_t Read(char* data, ssize_t sizeOfData);
 		ssize_t ReadBigData(CDynBuffer* data);
 

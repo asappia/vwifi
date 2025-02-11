@@ -16,36 +16,28 @@ class CCTRLServer : public CSocketServer, public CSocketServerFunctionITCP
 		bool _Listen(TDescriptor& master, TPort port) override;
 		TDescriptor _Accept(TDescriptor master, TCID& cid) override;
 
-		ssize_t Read(char* data, ssize_t sizeOfData);
+		// Bring base class functions into scope
+		using CSocketServer::Send;
+		using CSocketServer::Read;
 
+		ssize_t Read(char* data, ssize_t sizeOfData);
 		ssize_t Send(char* data, ssize_t sizeOfData);
 
 		TOrder GetOrder();
-
 		bool SendCInfoWifi(CInfoWifi* infoWifi);
-
 		void SendList();
-
 		void ChangeCoordinate();
-
 		void SetName();
-
 		void ChangePacketLoss();
-
 		void SendStatus();
-
 		void SendShow();
-
 		void SendDistance();
-
 		void SetScale();
-
 		void CloseAllClient();
 
-	public :
-
+	public:
 		CCTRLServer(CWifiServer* wifiServerVTCP, CWifiServer* wifiServerITCP, CWifiServer* wifiServerSPY, CSelect* scheduler);
-
+		virtual ~CCTRLServer();
 		void ReceiveOrder();
 };
 
